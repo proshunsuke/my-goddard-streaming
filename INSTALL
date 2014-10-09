@@ -1,0 +1,42 @@
+Author: Jae Chung (goos@cs.wpi.edu)
+Date:   May 2005
+
+To install the Goddard streaming servera and client do the following:
+
+1. Untar goddard.tar to your ns source directory:
+
+   > cd ns-2.2x 
+   > tar -xf ~/goddard-install/goddard.tar
+
+2. In ns-2.2x/apps/app.h, add two public methods to Application class:
+
+   /* For Goddard Streaming Application */
+   inline virtual void send(int nbytes, AppData* data) { send(nbytes); }
+   inline Agent* get_agent() { return agent_; }
+
+
+3. In ns-2.2x/tcl/lib/ns-lib.tcl, add the following lines before
+   "source ns-default.tcl":
+
+   # Goddard Streaming Application
+   source ../goddard/goddard-class.tcl
+   source ../goddard/goddard-default.tcl
+
+
+4. In ns-2.2x/Makefile.in,
+   a) add the following lines to "OBJ_CC" list:
+
+	goddard/udpapp.o goddard/mchannel_proc.o \
+	goddard/gframe_queue.o goddard/goddard.o goddard/gplayer.o \
+
+   b) add the following lines to "NS_TCL_LIB" list:
+
+	tcl/goddard/goddard-class.tcl \
+	tcl/goddard/goddard-default.tcl \
+
+5. Run "./configure" and then "make"
+
+6. Test the provided example goddard simulation:
+
+    > cd ns-2.2x/tcl/goddard/ex/
+    > ns test-goddard.tcl

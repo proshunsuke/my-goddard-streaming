@@ -1,0 +1,54 @@
+Author: Jae Chung (goos@cs.wpi.edu)
+Date:   May 2005
+
+Goddard, named after Robert Goddard, the "Father of Modern Rocketry" and a WPI
+alumnus, is a media streaming application (client and server).  Goddard is
+designed based on the behaviors of Real Networks streaming media and Windows
+Stream media, as observed in measurements studies [1] and [2], respectively.
+The Goddard streaming client and server use packet-pairs [3,4,5] to estimate
+the bottleneck capacity and select an appropriate media encoding level before
+streaming.  During streaming, Goddard client (Gplayer) and server re-select
+the media to stream (i.e., perform media scaling) in response to network
+packet losses or re-buffering events that occur when the client playout buffer
+empties.  Goddard also simulates frame playout of the received media at the
+client, allowing frame rate and jitter to be measured for performance
+evaluation.  For details on the Goddard design, refer to [6].
+
+The following directories contain the Goddard C++ and OTcl source files and an
+Goddard simulation example.
+
+  ns-2.2x/goddard/         
+  ns-2.2x/tcl/goddard/
+  ns-2.2x/tcl/goddard/ex/
+
+The actual Goddard server and client is implemented in C++, where the Goddard
+simulation setup helper object (GodardStreaming Class) is implemented in OTcl
+space.  Refer to "ns-2.2x/tcl/goddard/ex/test-goddard.tcl" to see how the
+helper object is used.  "ns-2.2x/tcl/goddard/goddard-default.tcl" contains the
+default Goddard parameter values.
+
+Have fun.
+
+
+[1] J. Chung, M. Claypool and Y. Zhu, "Measurement of the Congestion
+    Responsiveness of RealPlayer Streaming Video Over UDP", In Proceedings of
+    the Packet Video Workshop (PV), Nantes, France, April 2003
+
+[2] J. Nichols, M. Claypool, R. Kinicki and M. Li, "Measurements of the
+    Congestion Responsiveness of Windows Streaming Media", In Proceedings of
+    NOSSDAV, Kinsale, County Cork, Ireland, June, 2004
+
+[3] J. C. Bolot, "Characterizing End-to-End Packet Delay and Loss in the
+    Internet", Journal of High Speed Networks, vol. 2, no. 3, pp. 289-298,
+    September 1993
+
+[4] V. Jacobson, "Congestion Avoidance and Control", In Proceedings of ACM
+    SIGCOMM, Stanford, CA, USA, August 1988.
+
+[5] S. Keshav, "A Control-Theoretic Approach to Flow Control", In Proceedings
+    of the conference on Communications Architecture & Protocols, 1991, pp.
+    315.
+
+[6] J. Chung, M. Claypool, and R. Kinicki, "MTP: A Streaming-Friendly
+    Transport Protocol, CS Department, Worcester Polytechnic Institute,
+    Tech. Rep. WPI-CS-TR-05-10, May 2005.
